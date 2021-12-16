@@ -1,29 +1,32 @@
-import { Component, NgModule, ViewChild } from "@angular/core";
+import { Component, NgModule, ViewChild } from '@angular/core';
 import {
   CdkDrag,
   CdkDragStart,
   CdkDropList,
   CdkDropListGroup,
-  moveItemInArray
-} from "@angular/cdk/drag-drop";
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: "my-app",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"]
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   @ViewChild(CdkDropListGroup) listGroup: CdkDropListGroup<CdkDropList>;
   @ViewChild(CdkDropList) placeholder: CdkDropList;
 
-  public items: Array<number> = [1, 2, 3, 4, 5];
+  public items: Array<number> = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22, 23, 24, 25, 26, 27, 28, 29, 30,
+  ];
 
   public itemSizes: Array<string> = [
-    "content-item-c11",
-    "content-item-c21",
-    "content-item-c11",
-    "content-item-c21",
-    "content-item-c11"
+    'content-item-c11',
+    'content-item-c21',
+    'content-item-c11',
+    'content-item-c21',
+    'content-item-c11',
   ];
 
   public target: CdkDropList<any>;
@@ -40,7 +43,7 @@ export class AppComponent {
   ngAfterViewInit() {
     let phElement = this.placeholder.element.nativeElement;
 
-    phElement.style.display = "none";
+    phElement.style.display = 'none';
     phElement.parentNode.removeChild(phElement);
   }
 
@@ -49,7 +52,7 @@ export class AppComponent {
   }
 
   shuffle() {
-    this.items.sort(function() {
+    this.items.sort(function () {
       return 0.5 - Math.random();
     });
   }
@@ -60,7 +63,7 @@ export class AppComponent {
     const phElement = this.placeholder.element.nativeElement;
     const parent = phElement.parentNode;
 
-    phElement.style.display = "none";
+    phElement.style.display = 'none';
     parent.removeChild(phElement);
     parent.appendChild(phElement);
 
@@ -69,7 +72,7 @@ export class AppComponent {
       parent.children[this.sourceIndex]
     );
 
-    console.log(this.sourceIndex, " => ", this.phElementIndex);
+    console.log(this.sourceIndex, ' => ', this.phElementIndex);
 
     if (this.sourceIndex != this.phElementIndex) {
       moveItemInArray(this.items, this.sourceIndex, this.phElementIndex);
@@ -133,16 +136,16 @@ export class AppComponent {
     phElement: HTMLElement,
     sourceElement: HTMLElement
   ) {
-    phElement.style.width = sourceElement.clientWidth + "px";
-    phElement.style.height = sourceElement.clientHeight + "px";
+    phElement.style.width = sourceElement.clientWidth + 'px';
+    phElement.style.height = sourceElement.clientHeight + 'px';
 
-    const size = Array.from(sourceElement.classList).find(c =>
-      c.startsWith("content-item-c")
+    const size = Array.from(sourceElement.classList).find((c) =>
+      c.startsWith('content-item-c')
     );
 
-    phElement.style.display = "";
-    const oldSize = Array.from(phElement.classList).find(c =>
-      c.startsWith("content-item-c")
+    phElement.style.display = '';
+    const oldSize = Array.from(phElement.classList).find((c) =>
+      c.startsWith('content-item-c')
     );
     if (oldSize) {
       phElement.classList.remove(oldSize);
